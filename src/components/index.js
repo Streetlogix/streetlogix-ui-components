@@ -1,3 +1,3 @@
-import Button from './Button/Button';
+import MessageDialog from './MessageDialog/MessageDialog';
 
-export { Button };
+export { MessageDialog };
