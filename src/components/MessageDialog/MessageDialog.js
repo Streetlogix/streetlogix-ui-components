@@ -13,8 +13,7 @@ import {
 import { CheckCircle, Warning, Cancel } from '@material-ui/icons';
 
 // UTILS/HELPERS/STYLES
-import { colors } from '../../utils/constants';
-//import { useStyles } from '../../utils/shared-classes';
+import { colors } from '../utils/constants';
 
 const useStyles = makeStyles({
   DialogRoot: {

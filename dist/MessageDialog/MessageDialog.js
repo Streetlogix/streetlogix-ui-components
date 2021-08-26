@@ -15,7 +15,7 @@ var _core = require("@material-ui/core");
 
 var _icons = require("@material-ui/icons");
 
-var _constants = require("../../utils/constants");
+var _constants = require("../utils/constants");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35,7 +35,6 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-//import { useStyles } from '../../utils/shared-classes';
 var useStyles = (0, _core.makeStyles)({
   DialogRoot: {
     textAlign: 'center'
