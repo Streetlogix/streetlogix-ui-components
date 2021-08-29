@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 import {
   makeStyles,
@@ -15,19 +14,18 @@ import { CheckCircle, Warning, Cancel } from '@material-ui/icons';
 // UTILS/HELPERS/STYLES
 import { colors } from '../utils/constants';
 
+import { MessageDialogProps } from './MessageDialog.types';
+
 const useStyles = makeStyles({
   DialogRoot: {
     textAlign: 'center',
   },
   DialogPaper: {
-    padding: '20px 60px',
-  },
-  TitleRoot: {
-    padding: 0,
+    minWidth: 400,
   },
   MessageDialogIcon: {
     fontSize: 40,
-    color: (props) => {
+    color: (props: any) => {
       if (props.type === 'success') return colors.successGreen;
       if (props.type === 'warning') return colors.warningYellow;
       if (props.type === 'error') return colors.errorRed;
@@ -35,17 +33,16 @@ const useStyles = makeStyles({
   },
   DialogActions: {
     justifyContent: 'center',
-    padding: 0,
   },
   ButtonRoot: {
     padding: '2px 30px',
     boxShadow: 'none',
-    color: (props) => {
+    color: (props: { type: string }) => {
       if (props.type === 'success') return colors.successGreen;
       if (props.type === 'warning') return colors.warningYellow;
       if (props.type === 'error') return colors.errorRed;
     },
-    background: (props) => {
+    background: (props: { type: string }) => {
       if (props.type === 'success') return '#E8FFDB';
       if (props.type === 'warning') return '#FFECDB';
       if (props.type === 'error') return '#FFDCDB';
@@ -53,21 +50,22 @@ const useStyles = makeStyles({
   },
 });
 
-const MessageDialog = (props) => {
-  const { type, message, btnText, show } = props;
-  const classes = useStyles(props);
-
+const MessageDialog: React.FC<MessageDialogProps> = ({
+  type,
+  message,
+  btnText,
+  show,
+  handleClose,
+}) => {
+  const classes = useStyles({ type });
   const [showDialog, setShowDialog] = useState(false);
-  const handleClose = () => {
-    setShowDialog(false);
-  };
   useEffect(() => {
     setShowDialog(show);
   }, [show]);
 
   return (
     <Dialog
-      open={show}
+      open={showDialog}
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
@@ -76,12 +74,7 @@ const MessageDialog = (props) => {
         paper: classes.DialogPaper,
       }}
     >
-      <DialogTitle
-        id="alert-dialog-title"
-        classes={{
-          root: classes.TitleRoot,
-        }}
-      >
+      <DialogTitle id="alert-dialog-title">
         {type && type === 'success' ? (
           <CheckCircle
             classes={{
@@ -127,20 +120,6 @@ const MessageDialog = (props) => {
       </DialogActions>
     </Dialog>
   );
-};
-
-MessageDialog.propTypes = {
-  type: PropTypes.string.isRequired,
-  message: PropTypes.string.isRequired,
-  btnText: PropTypes.string.isRequired,
-  show: PropTypes.bool.isRequired,
-};
-
-MessageDialog.defaultProps = {
-  type: null, // success, warning, error
-  message: null,
-  btnText: null,
-  show: null,
 };
 
 export default MessageDialog;

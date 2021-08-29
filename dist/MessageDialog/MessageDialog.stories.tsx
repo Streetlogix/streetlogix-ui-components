@@ -42,6 +42,6 @@ export default {
   },
 };
 
-const Template = (args) => <MessageDialog {...args} />;
+const Template = (args: any) => <MessageDialog {...args} />;
 
 export const Default = Template.bind({});
